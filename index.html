@@ -4,6 +4,23 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Shreyash Kakde — AI/ML Researcher & Engineer</title>
+<meta name="description" content="Shreyash Kakde is an AI/ML researcher and engineer at USC building LLM pipelines, RAG agents, and computer-vision tools for healthcare. Published in Springer and arXiv." />
+<link rel="canonical" href="https://shreyashkportfolio.netlify.app/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Shreyash Kakde — AI/ML Researcher & Engineer" />
+<meta property="og:description" content="Building LLM pipelines, RAG agents, and applied ML for healthcare. MS at USC. Research published in Springer and arXiv." />
+<meta property="og:url" content="https://shreyashkportfolio.netlify.app/" />
+<meta property="og:image" content="https://shreyashkportfolio.netlify.app/assets/og-image.png" />
+<meta property="og:site_name" content="Shreyash Kakde" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Shreyash Kakde — AI/ML Researcher & Engineer" />
+<meta name="twitter:description" content="Building LLM pipelines, RAG agents, and applied ML for healthcare. MS at USC." />
+<meta name="twitter:image" content="https://shreyashkportfolio.netlify.app/assets/og-image.png" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -64,6 +81,24 @@ a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 ::selection{background:var(--accent-soft);color:#fff}
 
+/* ---------- SKIP TO CONTENT ---------- */
+.skip-link{
+  position:absolute;top:-100%;left:16px;z-index:999;
+  padding:12px 20px;border-radius:8px;
+  background:var(--accent);color:var(--on-accent);
+  font-size:14px;font-weight:500;
+  transition:top .2s ease;
+}
+.skip-link:focus{top:16px}
+
+/* ---------- FOCUS STYLES ---------- */
+:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:4px;
+}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
+
 .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
 .mono{font-family:var(--mono);font-weight:400;letter-spacing:.02em}
 .eyebrow{
@@ -87,6 +122,9 @@ header.nav.scrolled{
   backdrop-filter:blur(14px) saturate(140%);
   border-bottom-color:var(--line-2);
 }
+:root[data-theme="light"] header.nav.scrolled{
+  background:rgba(247,247,245,0.72);
+}
 .nav-inner{
   max-width:var(--maxw);margin:0 auto;
   padding:16px var(--pad);
@@ -109,9 +147,49 @@ header.nav.scrolled{
   transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
 }
 .nav-cta:hover{transform:translateY(-1px);filter:brightness(1.08);box-shadow:0 8px 22px var(--accent-shadow)}
-.nav-toggle{display:none;background:none;border:0;color:var(--fg);cursor:pointer}
+
+/* ---------- MOBILE NAV ---------- */
+.nav-toggle{
+  display:none;background:none;border:0;color:var(--fg);cursor:pointer;
+  width:40px;height:40px;border-radius:8px;
+  place-items:center;
+  transition:background .2s;
+}
+.nav-toggle:hover{background:var(--surface-2)}
+.nav-toggle svg{width:22px;height:22px}
+.nav-toggle .icon-close{display:none}
+body.menu-open .nav-toggle .icon-menu{display:none}
+body.menu-open .nav-toggle .icon-close{display:block}
+
+.mobile-menu{
+  display:none;
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:49;
+  background:var(--bg);
+  padding:100px var(--pad) 40px;
+  flex-direction:column;gap:8px;
+  overflow-y:auto;
+}
+body.menu-open .mobile-menu{display:flex}
+body.menu-open{overflow:hidden}
+.mobile-menu a{
+  font-size:clamp(1.3rem,4vw,1.8rem);font-weight:500;
+  padding:14px 0;color:var(--muted);
+  border-bottom:1px solid var(--line-2);
+  transition:color .2s;
+}
+.mobile-menu a:hover,.mobile-menu a:focus{color:var(--fg)}
+.mobile-menu .mob-cta{
+  margin-top:auto;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:16px;font-weight:500;
+  padding:16px 24px;border-radius:12px;
+  background:var(--accent);color:var(--on-accent);
+  text-align:center;
+}
+
 @media(max-width:760px){
   .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:grid}
 }
 
 /* ---------- HERO ---------- */
@@ -181,7 +259,7 @@ header.nav.scrolled{
   font-family:var(--mono);font-size:14px;color:var(--faint);
   letter-spacing:.04em;display:inline-flex;align-items:center;gap:48px;white-space:nowrap;
 }
-.marquee-track span::after{content:"◇";color:var(--gold);opacity:.7}
+.marquee-track span::after{content:"\25C7";color:var(--gold);opacity:.7}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
 /* ---------- SECTION HEADERS ---------- */
@@ -218,46 +296,6 @@ section{position:relative}
 .fstep p{margin-top:12px;color:var(--muted);max-width:46ch;text-wrap:pretty}
 .fstep .row{margin-top:16px;display:flex;gap:14px;flex-wrap:wrap}
 @media(max-width:860px){.featured{grid-template-columns:1fr}.featured-sticky{position:static}}
-
-/* ---------- PLACEHOLDER VISUAL ---------- */
-.ph{
-  position:relative;display:grid;place-items:center;background:
-    repeating-linear-gradient(135deg,var(--stripe) 0 11px,transparent 11px 22px),
-    radial-gradient(120% 100% at 50% 0%, var(--glow-soft), transparent 60%),
-    var(--bg-2);
-  color:var(--faint);
-}
-.ph .ph-label{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-align:center;padding:0 20px;line-height:1.7}
-.ph .ph-label b{display:block;color:var(--muted);font-weight:500;font-size:13px;margin-bottom:4px}
-
-/* globe motif */
-.globe-ph{overflow:hidden}
-.globe{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);
-  width:62%;aspect-ratio:1;border-radius:50%;
-  background:
-    radial-gradient(circle at 34% 30%, color-mix(in oklch,var(--accent) 32%,transparent), transparent 55%),
-    radial-gradient(circle at 70% 75%, var(--bg), transparent 60%),
-    color-mix(in oklch,var(--accent) 14%,var(--bg-2));
-  box-shadow:inset -18px -22px 60px rgba(0,0,0,.55), 0 0 60px var(--glow);
-  border:1px solid var(--accent-line);
-}
-.globe::before,.globe::after{
-  content:"";position:absolute;inset:0;border-radius:50%;
-  border:1px solid color-mix(in oklch,var(--accent) 26%,transparent);
-}
-.globe::before{
-  background:
-    repeating-linear-gradient(to bottom, transparent 0 13.5%, color-mix(in oklch,var(--accent) 16%,transparent) 13.5% 14%);
-  -webkit-mask:radial-gradient(circle,#000 99%,transparent);mask:radial-gradient(circle,#000 99%,transparent);
-}
-.globe::after{
-  background:repeating-linear-gradient(to right, transparent 0 11%, color-mix(in oklch,var(--accent) 13%,transparent) 11% 11.5%);
-  animation:spin 26s linear infinite;
-  -webkit-mask:radial-gradient(circle,#000 70%,transparent 99%);mask:radial-gradient(circle,#000 70%,transparent 99%);
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.globe::after{animation:none}}
 
 /* ---------- TAGS / CHIPS ---------- */
 .tags{display:flex;flex-wrap:wrap;gap:7px}
@@ -395,14 +433,17 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
 </head>
 <body>
 
+<!-- SKIP TO CONTENT -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- NAV -->
-<header class="nav" id="nav">
+<header class="nav" id="nav" role="banner">
   <div class="nav-inner">
     <a class="brand" href="#home">
-      <span class="glyph">SK</span>
+      <span class="glyph" aria-hidden="true">SK</span>
       <span>Shreyash Kakde</span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Main navigation">
       <a href="#work">Work</a>
       <a href="#publications">Publications</a>
       <a href="#skills">Skills</a>
@@ -410,21 +451,37 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
       <a href="#about">About</a>
     </nav>
     <a class="nav-cta" href="#contact">Get in touch</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
   </div>
 </header>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation menu">
+  <a href="#work">Work</a>
+  <a href="#publications">Publications</a>
+  <a href="#skills">Skills</a>
+  <a href="#certifications">Certs</a>
+  <a href="#about">About</a>
+  <a class="mob-cta" href="#contact">Get in touch</a>
+</div>
+
+<main id="main-content">
+
 <!-- HERO -->
-<section class="hero" id="home" data-screen-label="Hero">
+<section class="hero" id="home">
   <div class="wrap">
-    <div class="status reveal"><span class="dot"></span> Open to ML / research roles · USC ’26</div>
+    <div class="status reveal"><span class="dot" aria-hidden="true"></span> Open to ML / research roles · USC '26</div>
     <h1 class="reveal">AI and computer-vision systems that <em>hold up</em> outside the lab.</h1>
-    <p class="lede reveal">I’m Shreyash Kakde — an AI/ML researcher and engineer pursuing my master’s at USC. I build LLM pipelines, deploy RAG agents, and ship applied ML for healthcare and developer tools, with research published and validated by clinicians.</p>
+    <p class="lede reveal">I'm Shreyash Kakde — an AI/ML researcher and engineer pursuing my master's at USC. I build LLM pipelines, deploy RAG agents, and ship applied ML for healthcare and developer tools, with research published and validated by clinicians.</p>
     <div class="hero-actions reveal">
       <a class="btn btn-primary" href="#work">
         View selected work
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="btn btn-ghost" href="#contact">Let’s collaborate</a>
+      <a class="btn btn-ghost" href="#contact">Let's collaborate</a>
     </div>
 
     <!-- STAT STRIP -->
@@ -446,7 +503,7 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
 </div>
 
 <!-- SELECTED WORK -->
-<section class="sec" id="work" data-screen-label="Selected Work">
+<section class="sec" id="work">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Selected Work</span>
@@ -458,8 +515,8 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
     <div class="featured">
       <div class="featured-sticky reveal">
         <div class="showcase">
-          <div class="showcase-bar"><i></i><i></i><i></i><span class="t">geolens · multi-agent globe</span></div>
-          <img src="assets/geolens.png" alt="GeoLens interactive 3D globe UI" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center top;" />
+          <div class="showcase-bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><span class="t">geolens · multi-agent globe</span></div>
+          <img src="assests/Geolens.png" alt="GeoLens interactive 3D globe UI showing Sydney with live agent data panels" loading="lazy" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center top;" />
           <div class="showcase-meta tags">
             <span class="tag">Next.js 16</span><span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Gemini 2.5</span>
           </div>
@@ -481,7 +538,7 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
           <h3>Gemini 2.5 Flash with Groq failover, Redis caching, verifiable citations.</h3>
           <p>Every agent is non-fatal and returns partial state on failure; results cache in Redis and every call is traced with LangSmith. The Narrator emits source URLs for each itinerary item to keep outputs grounded.</p>
           <div class="row link-row">
-            <a class="ilink" href="https://github.com/hoax12/GeoLens" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+            <a class="ilink" href="https://github.com/hoax12/GeoLens" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
           </div>
         </div>
       </div>
@@ -493,42 +550,42 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
         <div class="ctop"><h3>RAG Biomedical QnA Chatbot</h3><span class="cidx">02</span></div>
         <p>An end-to-end Retrieval-Augmented Generation system on a fine-tuned Mistral-7B — 90.4% BERTScore with 60% lower retrieval latency, grounding medical answers in literature instead of hallucinating.</p>
         <div class="tags"><span class="tag">Mistral-7B</span><span class="tag">QLoRA</span><span class="tag">FAISS</span><span class="tag">RAG</span></div>
-        <div class="link-row"><a class="ilink" href="https://drive.google.com/drive/folders/1SVMlMgPWHKg_khI3cOl5jTRKihET7l5W?usp=drive_link" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="ilink" href="https://github.com/hoax12/MedChatBot" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        <div class="link-row"><a class="ilink" href="https://drive.google.com/drive/folders/1SVMlMgPWHKg_khI3cOl5jTRKihET7l5W?usp=drive_link" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a class="ilink" href="https://github.com/hoax12/MedChatBot" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
       </article>
 
       <article class="card reveal" data-tilt>
         <div class="ctop"><h3>FinAgent — Multi-Agent Finance System</h3><span class="cidx">03</span></div>
         <p>A lightweight multi-agent system that pairs real-time web search with live stock data — coordinated Web Search and Finance agents on a Groq LLM, wired to DuckDuckGo and Yahoo Finance.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">Groq</span><span class="tag">Multi-Agent</span><span class="tag">yfinance</span></div>
-        <div class="link-row"><a class="ilink" href="https://github.com/hoax12/FinAgent" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        <div class="link-row"><a class="ilink" href="https://github.com/hoax12/FinAgent" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
       </article>
 
       <article class="card reveal" data-tilt>
         <div class="ctop"><h3>AI Dermatology Diagnostic Tool</h3><span class="cidx">04</span></div>
         <p>Scalp-image analysis using self-supervised learning with &lt;500 labeled samples. Cut diagnosis time from 30 minutes to under 5, validated by 10+ dermatologists.</p>
         <div class="tags"><span class="tag">Computer Vision</span><span class="tag">Self-Supervised</span><span class="tag">Medical AI</span></div>
-        <div class="link-row"><a class="ilink" href="https://drive.google.com/file/d/14QayPah7ontVgP1NIQS_NLUxuDZ0ncvb/view?usp=drive_link" target="_blank" rel="noopener">View work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        <div class="link-row"><a class="ilink" href="https://drive.google.com/file/d/14QayPah7ontVgP1NIQS_NLUxuDZ0ncvb/view?usp=drive_link" target="_blank" rel="noopener">View work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
       </article>
 
       <article class="card reveal" data-tilt>
         <div class="ctop"><h3>Named Entity Recognition System</h3><span class="cidx">05</span></div>
         <p>A Bi-LSTM-CRF model trained on CoNLL-2003 — 83.8% F1 across 50 epochs and 10K+ labeled entities, tuned with dropout and learning-rate scheduling.</p>
         <div class="tags"><span class="tag">PyTorch</span><span class="tag">Bi-LSTM</span><span class="tag">CRF</span><span class="tag">NLP</span></div>
-        <div class="link-row"><a class="ilink" href="https://github.com/hoax12/BiLSTM-CRF-NER" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        <div class="link-row"><a class="ilink" href="https://github.com/hoax12/BiLSTM-CRF-NER" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
       </article>
 
       <article class="card reveal" data-tilt>
         <div class="ctop"><h3>Library Management System</h3><span class="cidx">06</span></div>
         <p>A full-featured system with a Python Tkinter GUI and MySQL backend — email notifications plus user and admin dashboards for issuing, tracking, and grievance handling.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">MySQL</span></div>
-        <div class="link-row"><a class="ilink" href="https://github.com/hoax12/Library_Management_System" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+        <div class="link-row"><a class="ilink" href="https://github.com/hoax12/Library_Management_System" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
       </article>
     </div>
   </div>
 </section>
 
 <!-- PUBLICATIONS -->
-<section class="sec" id="publications" data-screen-label="Publications" style="background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
+<section class="sec" id="publications" style="background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Publications &amp; Research</span>
@@ -545,8 +602,8 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
           <div class="tags" style="margin-top:16px"><span class="tag">RAG</span><span class="tag">Mistral-7B</span><span class="tag">QLoRA</span><span class="tag">FAISS</span><span class="tag">Biomedical NLP</span></div>
         </div>
         <div class="pub-side">
-          <a class="ilink" href="https://arxiv.org/abs/2509.05505" target="_blank" rel="noopener">View paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-          <a class="ilink" href="https://scholar.google.com/citations?user=JJLX9JAAAAAJ&hl=en" target="_blank" rel="noopener">Citation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ilink" href="https://arxiv.org/abs/2509.05505" target="_blank" rel="noopener">View paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ilink" href="https://scholar.google.com/citations?user=JJLX9JAAAAAJ&hl=en" target="_blank" rel="noopener">Citation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
       </article>
       <article class="pub reveal">
@@ -558,8 +615,8 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
           <div class="tags" style="margin-top:16px"><span class="tag">Computer Vision</span><span class="tag">Medical AI</span><span class="tag">Image Processing</span></div>
         </div>
         <div class="pub-side">
-          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_33" target="_blank" rel="noopener">View paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_33#citeas" target="_blank" rel="noopener">Citation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_33" target="_blank" rel="noopener">View paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_33#citeas" target="_blank" rel="noopener">Citation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
       </article>
       <article class="pub reveal">
@@ -571,43 +628,16 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
           <div class="tags" style="margin-top:16px"><span class="tag">Deep Learning</span><span class="tag">Survey Paper</span><span class="tag">Medical Imaging</span></div>
         </div>
         <div class="pub-side">
-          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_34" target="_blank" rel="noopener">View paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_34#citeas" target="_blank" rel="noopener">Citation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_34" target="_blank" rel="noopener">View paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ilink" href="https://link.springer.com/chapter/10.1007/978-981-99-9486-1_34#citeas" target="_blank" rel="noopener">Citation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="sec" id="about" data-screen-label="About">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">About</span>
-      <h2>Hello, I’m Shreyash.</h2>
-    </div>
-    <div class="about">
-      <div class="about-portrait reveal">
-        <img src="assets/portrait.jpeg" alt="Shreyash Kakde at USC commencement" style="aspect-ratio:4/5;width:100%;object-fit:cover;object-position:50% 22%;display:block;" />
-        <div class="pcap"><span>Los Angeles, CA</span><span>USC · MS</span></div>
-      </div>
-      <div class="about-body reveal">
-        <p>I’m an <strong>AI-focused master’s student at USC</strong> with hands-on experience building LLM pipelines, deploying RAG agents, and solving applied ML problems in healthcare and developer tools. My research has improved <em>diagnostic accuracy by 10–20%</em> in medical imaging applications.</p>
-        <p>As a <strong>Research Assistant at USC</strong> and former <strong>AI Research Fellow at TIH-IoT, IIT Bombay</strong> — awarded the $7,100 Chanakya Fellowship — I’ve built AI diagnostic tools that cut diagnosis time from 30 minutes to under 5, with validation from 10+ dermatologists.</p>
-        <p>I’m driven by using deep learning and computer vision to solve real-world problems, especially in healthcare. My work has been published in peer-reviewed conferences and recognized by industry stakeholders.</p>
-
-        <div class="creds">
-          <div class="cred"><div class="cy">2024–26</div><div class="cmain">M.S., University of Southern California<span>AI / Machine Learning · Research Assistant</span></div></div>
-          <div class="cred"><div class="cy">Fellowship</div><div class="cmain">AI Research Fellow — TIH-IoT, IIT Bombay<span>$7,100 Chanakya Fellowship</span></div></div>
-          <div class="cred"><div class="cy">Published</div><div class="cmain">2× Springer ICTCS-2023<span>Medical imaging &amp; deep learning</span></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section class="sec" id="skills" data-screen-label="Skills" style="background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
+<!-- SKILLS (moved before About to match nav order) -->
+<section class="sec" id="skills" style="background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Skills &amp; Expertise</span>
@@ -615,27 +645,27 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
     </div>
     <div class="skills-grid">
       <div class="skill reveal">
-        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6.5 9.5 11M17 6.5 14.5 11M7 17.5 9.5 13M17 17.5 14.5 13"/></svg></span><h3>Machine Learning</h3></div>
+        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6.5 9.5 11M17 6.5 14.5 11M7 17.5 9.5 13M17 17.5 14.5 13"/></svg></span><h3>Machine Learning</h3></div>
         <div class="tags"><span class="tag">Neural Networks</span><span class="tag">Deep Learning</span><span class="tag">LLMs</span><span class="tag">RAG</span><span class="tag">LoRA</span><span class="tag">PEFT</span><span class="tag">Transformers</span><span class="tag">RNN / LSTM</span><span class="tag">CNN</span><span class="tag">GNN</span></div>
       </div>
       <div class="skill reveal">
-        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Computer Vision</h3></div>
+        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Computer Vision</h3></div>
         <div class="tags"><span class="tag">OpenCV</span><span class="tag">Medical Imaging</span><span class="tag">Image Processing</span><span class="tag">Self-Supervised</span><span class="tag">CUDA</span></div>
       </div>
       <div class="skill reveal">
-        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 9-3 3 3 3M16 9l3 3-3 3M13 6l-2 12"/></svg></span><h3>Programming</h3></div>
+        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 9-3 3 3 3M16 9l3 3-3 3M13 6l-2 12"/></svg></span><h3>Programming</h3></div>
         <div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C++</span><span class="tag">SQL</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Hugging Face</span><span class="tag">FAISS</span></div>
       </div>
       <div class="skill reveal">
-        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 3 0 0 0 18 0M3 12a9 3 0 0 1 18 0M3 5a9 3 0 0 0 18 0M3 5a9 3 0 0 1 18 0M3 5v14a9 3 0 0 0 18 0V5M3 12v0"/></svg></span><h3>Data Science</h3></div>
+        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 3 0 0 0 18 0M3 12a9 3 0 0 1 18 0M3 5a9 3 0 0 0 18 0M3 5a9 3 0 0 1 18 0M3 5v14a9 3 0 0 0 18 0V5M3 12v0"/></svg></span><h3>Data Science</h3></div>
         <div class="tags"><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Scikit-Learn</span><span class="tag">Data Mining</span><span class="tag">Feature Engineering</span><span class="tag">Tableau</span></div>
       </div>
       <div class="skill reveal">
-        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19a4.5 4.5 0 1 0-1-8.9A6 6 0 0 0 5 12a4 4 0 0 0 1 7.9Z"/></svg></span><h3>Cloud &amp; DevOps</h3></div>
+        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 1 0-1-8.9A6 6 0 0 0 5 12a4 4 0 0 0 1 7.9Z"/></svg></span><h3>Cloud &amp; DevOps</h3></div>
         <div class="tags"><span class="tag">AWS</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span><span class="tag">Kafka</span><span class="tag">Docker</span><span class="tag">MongoDB</span><span class="tag">MySQL</span><span class="tag">BigQuery</span><span class="tag">Git</span></div>
       </div>
       <div class="skill reveal">
-        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A3.5 3.5 0 0 0 12 6 3.5 3.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg></span><h3>Healthcare AI</h3></div>
+        <div class="sk-head"><span class="sk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A3.5 3.5 0 0 0 12 6 3.5 3.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg></span><h3>Healthcare AI</h3></div>
         <div class="tags"><span class="tag">Medical Image Analysis</span><span class="tag">Clinical Diagnostics</span><span class="tag">Ophthalmology</span><span class="tag">Dermatology</span></div>
       </div>
     </div>
@@ -643,7 +673,7 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
 </section>
 
 <!-- CERTIFICATIONS -->
-<section class="sec" id="certifications" data-screen-label="Certifications">
+<section class="sec" id="certifications">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Certifications</span>
@@ -656,11 +686,11 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
         <div class="cg-head"><div><span class="cg-name">Machine Learning Specialization</span><span class="cg-by">DeepLearning.AI · Stanford — Coursera</span></div><span class="cg-count">2</span></div>
         <div class="cert-item">
           <div><span class="ci-main">Supervised Machine Learning: Regression &amp; Classification</span><span class="ci-date">Dec 2022</span></div>
-          <a class="ci-verify" href="https://coursera.org/verify/FXVDAYR5X2MH" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ci-verify" href="https://coursera.org/verify/FXVDAYR5X2MH" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="cert-item">
           <div><span class="ci-main">Advanced Learning Algorithms</span><span class="ci-date">Mar 2023</span></div>
-          <a class="ci-verify" href="https://coursera.org/verify/CLA473Y5VCTZ" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ci-verify" href="https://coursera.org/verify/CLA473Y5VCTZ" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
       </div>
 
@@ -668,19 +698,19 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
         <div class="cg-head"><div><span class="cg-name">Google Data Analytics</span><span class="cg-by">Google — Coursera</span></div><span class="cg-count">4</span></div>
         <div class="cert-item">
           <div><span class="ci-main">Ask Questions to Make Data-Driven Decisions</span><span class="ci-date">Dec 2022</span></div>
-          <a class="ci-verify" href="https://coursera.org/verify/RSK55M5WV8TF" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ci-verify" href="https://coursera.org/verify/RSK55M5WV8TF" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="cert-item">
           <div><span class="ci-main">Prepare Data for Exploration</span><span class="ci-date">Jan 2023</span></div>
-          <a class="ci-verify" href="https://coursera.org/verify/5JSG7RUC9CNU" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ci-verify" href="https://coursera.org/verify/5JSG7RUC9CNU" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="cert-item">
           <div><span class="ci-main">Process Data from Dirty to Clean</span><span class="ci-date">Jan 2023</span></div>
-          <a class="ci-verify" href="https://coursera.org/verify/JPHUCY4XMSRV" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ci-verify" href="https://coursera.org/verify/JPHUCY4XMSRV" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="cert-item">
           <div><span class="ci-main">Analyze Data to Answer Questions</span><span class="ci-date">Feb 2023</span></div>
-          <a class="ci-verify" href="https://coursera.org/verify/5EJ45B3LMAMP" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ci-verify" href="https://coursera.org/verify/5EJ45B3LMAMP" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
       </div>
 
@@ -698,7 +728,7 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
         <div class="cg-head"><div><span class="cg-name">Python &amp; Tooling</span><span class="cg-by">IBM · KodeKloud</span></div><span class="cg-count">2</span></div>
         <div class="cert-item">
           <div><span class="ci-main">Python Basics for Data Science (PY0101EN)</span><span class="ci-date">IBM — edX · Jun 2022</span></div>
-          <a class="ci-verify" href="https://courses.edx.org/certificates/887cc2faf79d4314a3479f905dfa4ca4" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="ci-verify" href="https://courses.edx.org/certificates/887cc2faf79d4314a3479f905dfa4ca4" target="_blank" rel="noopener">Verify <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="cert-item">
           <div><span class="ci-main">Getting Started with Docker</span><span class="ci-date">KodeKloud · Oct 2022</span></div>
@@ -719,48 +749,91 @@ footer{border-top:1px solid var(--line-2);padding:40px 0 48px}
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="sec contact" id="contact" data-screen-label="Contact">
+<!-- ABOUT (moved after Certs to match nav order) -->
+<section class="sec" id="about">
   <div class="wrap">
-    <div class="contact-card reveal">
-      <span class="eyebrow" style="justify-content:center">Get in touch</span>
-      <h2 style="margin-top:18px">Let’s collaborate on <em>AI research</em>.</h2>
-      <p>I’m always interested in new research opportunities, ML projects, and collaborations — healthcare AI, computer vision, or an exciting idea you want to build. I’d love to hear from you.</p>
-      <div class="contact-actions">
-        <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#66050902030b070f0a12090b0326010b070f0a4805090b">
-          Email me
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M3 7v10h18V7M3 7h18"/></svg>
-        </a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/shreyashk1/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    <div class="sec-head reveal">
+      <span class="eyebrow">About</span>
+      <h2>Hello, I'm Shreyash.</h2>
+    </div>
+    <div class="about">
+      <div class="about-portrait reveal">
+        <img src="assests/Grad.jpg" alt="Shreyash Kakde at USC commencement" loading="lazy" style="aspect-ratio:4/5;width:100%;object-fit:cover;object-position:50% 22%;display:block;" />
+        <div class="pcap"><span>Los Angeles, CA</span><span>USC · MS</span></div>
       </div>
-      <div class="contact-meta">
-        <a href="/cdn-cgi/l/email-protection#7d1e121918101c1411091210183d1a101c1411531e1210"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M3 7v10h18V7"/></svg><span class="__cf_email__" data-cfemail="e1828e85848c80888d958e8c84a1868c80888dcf828e8c">[email&#160;protected]</span></a>
-        <a href="tel:+12134212209"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>(213) 421-2209</a>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>Los Angeles, CA</span>
+      <div class="about-body reveal">
+        <p>I'm an <strong>AI-focused master's student at USC</strong> with hands-on experience building LLM pipelines, deploying RAG agents, and solving applied ML problems in healthcare and developer tools. My research has improved <em>diagnostic accuracy by 10–20%</em> in medical imaging applications.</p>
+        <p>As a <strong>Research Assistant at USC</strong> and former <strong>AI Research Fellow at TIH-IoT, IIT Bombay</strong> — awarded the $7,100 Chanakya Fellowship — I've built AI diagnostic tools that cut diagnosis time from 30 minutes to under 5, with validation from 10+ dermatologists.</p>
+        <p>I'm driven by using deep learning and computer vision to solve real-world problems, especially in healthcare. My work has been published in peer-reviewed conferences and recognized by industry stakeholders.</p>
+
+        <div class="creds">
+          <div class="cred"><div class="cy">2024–26</div><div class="cmain">M.S., University of Southern California<span>AI / Machine Learning · Research Assistant</span></div></div>
+          <div class="cred"><div class="cy">Fellowship</div><div class="cmain">AI Research Fellow — TIH-IoT, IIT Bombay<span>$7,100 Chanakya Fellowship</span></div></div>
+          <div class="cred"><div class="cy">Published</div><div class="cmain">2× Springer ICTCS-2023<span>Medical imaging &amp; deep learning</span></div></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <span class="eyebrow" style="justify-content:center">Get in touch</span>
+      <h2 style="margin-top:18px">Let's collaborate on <em>AI research</em>.</h2>
+      <p>I'm always interested in new research opportunities, ML projects, and collaborations — healthcare AI, computer vision, or an exciting idea you want to build. I'd love to hear from you.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:shreyashkakde12@gmail.com">
+          Email me
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7l9 6 9-6M3 7v10h18V7M3 7h18"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/shreyashk1/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      </div>
+      <div class="contact-meta">
+        <a href="mailto:shreyashkakde12@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7l9 6 9-6M3 7v10h18V7"/></svg>shreyashkakde12@gmail.com</a>
+        <a href="tel:+12134212209"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>(213) 421-2209</a>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>Los Angeles, CA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap foot-inner">
-    <a class="brand" href="#home"><span class="glyph">SK</span><span>Shreyash Kakde</span></a>
+    <a class="brand" href="#home"><span class="glyph" aria-hidden="true">SK</span><span>Shreyash Kakde</span></a>
     <div class="foot-links">
-      <a class="soc" href="https://github.com/hoax12" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.300000000000000000-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.4 4.6-4.6 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a>
-      <a class="soc" href="https://www.linkedin.com/in/shreyashk1/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM0 8h5v16H0V8Zm7.5 0H12v2.2h.1c.6-1.1 2.1-2.3 4.3-2.3 4.6 0 5.5 3 5.5 7V24h-5v-7c0-1.7 0-3.8-2.3-3.8s-2.7 1.8-2.7 3.7V24h-5V8Z"/></svg></a>
-      <a class="soc" href="https://scholar.google.com/citations?user=jOEIzi8AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 8l11 6 9-4.9V17h2V8L12 2ZM5 13.2V17c0 1.7 3.1 4 7 4s7-2.3 7-4v-3.8l-7 3.8-7-3.8Z"/></svg></a>
-      <a class="soc" href="/cdn-cgi/l/email-protection#77141813121a161e1b03181a1237101a161e1b5914181a" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M3 7v10h18V7H3Z"/></svg></a>
+      <a class="soc" href="https://github.com/hoax12" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.4 4.6-4.6 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a>
+      <a class="soc" href="https://www.linkedin.com/in/shreyashk1/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM0 8h5v16H0V8Zm7.5 0H12v2.2h.1c.6-1.1 2.1-2.3 4.3-2.3 4.6 0 5.5 3 5.5 7V24h-5v-7c0-1.7 0-3.8-2.3-3.8s-2.7 1.8-2.7 3.7V24h-5V8Z"/></svg></a>
+      <a class="soc" href="https://scholar.google.com/citations?user=jOEIzi8AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 1 8l11 6 9-4.9V17h2V8L12 2ZM5 13.2V17c0 1.7 3.1 4 7 4s7-2.3 7-4v-3.8l-7 3.8-7-3.8Z"/></svg></a>
+      <a class="soc" href="mailto:shreyashkakde12@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7l9 6 9-6M3 7v10h18V7H3Z"/></svg></a>
     </div>
-    <div class="foot-meta">© 2026 · Built in Los Angeles</div>
+    <div class="foot-meta">&copy; 2026 · Built in Los Angeles</div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // nav shadow on scroll
 const nav=document.getElementById('nav');
 const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>20);
 onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+// mobile menu toggle
+const toggle=document.querySelector('.nav-toggle');
+const mobileMenu=document.getElementById('mobile-menu');
+toggle.addEventListener('click',()=>{
+  const open=document.body.classList.toggle('menu-open');
+  toggle.setAttribute('aria-expanded',open);
+});
+mobileMenu.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.body.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded','false');
+  });
+});
 
 // reveal on scroll
 const io=new IntersectionObserver((entries)=>{
@@ -784,56 +857,6 @@ document.querySelectorAll('[data-tilt]').forEach(card=>{
     card.style.setProperty('--mx',((ev.clientX-r.left)/r.width*100)+'%');
   });
 });
-</script>
-
-<!-- TWEAKS -->
-<div id="tweaks-root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel">
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "theme": "dark",
-  "accent": "oklch(0.70 0.14 295)",
-  "headings": "Grotesk"
-}/*EDITMODE-END*/;
-
-function PortfolioTweaks(){
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  React.useEffect(()=>{
-    const r = document.documentElement;
-    r.setAttribute('data-theme', t.theme);
-    r.style.setProperty('--accent', t.accent);
-    // dark text on light accents, white text on dark accents
-    const L = parseFloat((t.accent.match(/oklch\(\s*([0-9.]+)/) || [])[1] || '0.7');
-    r.style.setProperty('--on-accent', L > 0.62 ? '#0a0a0a' : '#ffffff');
-    r.style.setProperty('--display', t.headings === 'Serif'
-      ? '"Instrument Serif", Georgia, serif'
-      : '"Schibsted Grotesk", system-ui, sans-serif');
-  }, [t]);
-
-  return (
-    <TweaksPanel title="Tweaks">
-      <TweakSection label="Theme" />
-      <TweakRadio label="Mode" value={t.theme} options={['dark','light']}
-        onChange={v=>setTweak('theme', v)} />
-      <TweakColor label="Accent" value={t.accent}
-        options={[
-          'oklch(0.47 0.17 27)',
-          'oklch(0.70 0.135 248)',
-          'oklch(0.70 0.13 162)',
-          'oklch(0.70 0.14 295)',
-          'oklch(0.74 0.14 55)'
-        ]}
-        onChange={v=>setTweak('accent', v)} />
-      <TweakSection label="Typography" />
-      <TweakRadio label="Headings" value={t.headings} options={['Grotesk','Serif']}
-        onChange={v=>setTweak('headings', v)} />
-    </TweaksPanel>
-  );
-}
-ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<PortfolioTweaks/>);
 </script>
 </body>
 </html>
